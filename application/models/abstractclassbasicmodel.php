@@ -1,13 +1,11 @@
 <?php
-
-
 abstract class AbstractclassBasicModel extends CI_Model
 {
 
 		const DB_TABLE= 'abstract';
  		const DB_TABLE_PK = 'abstract';
 
- 		private $last_id;
+ 		private $last_id='X';
 
  		public function insert()
  		{
@@ -77,7 +75,4 @@ abstract class AbstractclassBasicModel extends CI_Model
  		{
  			return $this->last_id;
  		}
-
-
-
 }

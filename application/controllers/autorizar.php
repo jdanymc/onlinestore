@@ -1,31 +1,50 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+session_start();
 include_once "AbstractController.php";
 class Autorizar extends AbstractController {
 
 	public function index()
 	{
-	    if(!$this->session->userdata('login') || !$this->input->post('email')) {
-            $this->load->view('autorizar/index');
+	    if($this->session->userdata('login')) {
+	        if($this->session->userdata('tipo')=='1')
+                $this->load->view('autorizar/home_administrador',array('nombre'=>$this->session->userdata('nombre')));
+            else
+                $this->load->view('autorizar/home_user',array('nombre'=>$this->session->userdata('nombre')));
         }
         else {
-            if($this->input->post('email')){
+            if($this->is_post()){
+                $email = $this->input->post('email');
+                $clave = $this->input->post('clave');
 
-
-                $data = array(
-                        'usuario' => 'johndoe',
-                        'email' => 'johndoe@some-site.com',
-                        'nombre' => 'johndoe@some-site.com',
-                        'login' => TRUE
-                    );
-
-                    $this->session->set_userdata($data);
+                //optiene clave de BD
+                $this->load->model('Usuario');
+                $result = $this->Usuario->login($email,$clave);
+                if($result) {
+                    $sess_array = array();
+                    foreach ($result as $row) {
+                        $sess_array = array(
+                            'id' => $row->id,
+                            'nombre' => $row->nombre.' '.$row->apellidos,
+                            'tipo' => $row->usuarios_tipos_id,
+                            'login' => TRUE
+                        );
+                        $this->session->set_userdata($sess_array);
+                    }
+                    if($this->session->userdata('tipo')=='1')
+                        $this->load->view('autorizar/home_administrador',$sess_array);
+                    else
+                        $this->load->view('autorizar/home_user',$sess_array);
                 }
+            }
             else{
                 $this->load->view('autorizar/index');
             }
         }
 	}
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+	public function salir(){
+        $this->session->unset_userdata('login');
+        session_destroy();
+        redirect('autorizar', 'refresh');
+    }
+}

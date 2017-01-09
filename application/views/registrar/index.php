@@ -23,7 +23,7 @@
             <h3>REGISTRAR NUEVO USUARIO</h3><hr />
         </div>
         <div class="card-block">
-        <form class="form-horizontal" enctype="multipart/form-data" role="form" data-toggle="validator">
+        <form class="form-horizontal" enctype="multipart/form-data" role="form" data-toggle="validator" method="post">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">(*) Email:</label>
                 <div class="col-sm-10">
