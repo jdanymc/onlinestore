@@ -16,17 +16,18 @@
   	<body>
  		<div class="container">
 	        <div class="card card-container">
-				<a href="#">Registro de usuario</a>
+				<a href="./registrar">Registro de usuario</a>
 	            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 	            <p id="profile-name" class="profile-name-card"></p>
 	            <form class="form-signin">
 	                <span id="reauth-email" class="reauth-email"></span>
-	                <input type="email" id="inputEmail" class="form-control" placeholder="Direccion de Email" required autofocus>
-	                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+	                <input type="email" id="email" class="form-control" placeholder="Direccion de Email" required autofocus>
+	                <input type="password" id="clave" class="form-control" placeholder="Contraseña" required>
 	               
 	                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
+
 	            </form><!-- /form -->
-	            <a href="#" class="forgot-password">
+				<a href="#" class="forgot-password">
 	                Olvidaste tu Password?
 	            </a>
 	        </div><!-- /card-container -->
