@@ -35,6 +35,7 @@ class Autorizar extends AbstractController {
                     else
                         $this->load->view('autorizar/home_user',$sess_array);
                 }
+                else $this->load->view('autorizar/index',array('login'=>0));
             }
             else{
                 $this->load->view('autorizar/index');

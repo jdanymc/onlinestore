@@ -3,6 +3,43 @@ include_once "AbstractController.php";
 class Registrar extends AbstractController {
     public function index()
     {
+        if($this->is_post()){
+            $email = $this->input->post('email');
+            $fechaaux = explode('/',$this->input->post('fechanac'));
+            $fechanac = $fechaaux[2].'-'.$fechaaux[1].'-'.$fechaaux[0];
+            $nombre = $this->input->post('nombre');
+            $apellidos = $this->input->post('apellidos');
+            $telefono = $this->input->post('telefono');
+            $clave = $this->input->post('clave');
+
+            $this->load->model('Usuario');
+            $this->Usuario->email = $email;
+            $this->Usuario->cumpleanios = $fechanac;
+            $this->Usuario->nombre = $nombre;
+            $this->Usuario->apellidos = $apellidos;
+            $this->Usuario->telefono = $telefono;
+            $this->Usuario->password = md5($clave);
+            $this->Usuario->save();
+
+        }
+        else
          $this->load->view('registrar/index');
+    }
+    public function subir(){
+        $config['upload_path'] = './fotos/';
+        $config['allowed_types'] = 'jpg|png';
+
+        //Se pueden configurar aun mas parámetros.
+        //Cargamos la librería de subida y le pasamos la configuración
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload()){
+            $error=array('error' => $this->upload->display_errors());
+            $this->load->view('subir_view', $error);
+        }else{
+            $datos["img"]=$this->upload->data();
+            //Cargamos la vista y le pasamos los datos
+            $this->load->view('subir_view', $datos);
+        }
     }
 }

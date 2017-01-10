@@ -5,7 +5,7 @@ abstract class AbstractclassBasicModel extends CI_Model
 		const DB_TABLE= 'abstract';
  		const DB_TABLE_PK = 'abstract';
 
- 		private $last_id='X';
+ 		private $last_id;
 
  		public function insert()
  		{
