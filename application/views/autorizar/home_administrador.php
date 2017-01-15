@@ -5,7 +5,8 @@
 </head>
 <body>
 <h1>Inicio</h1>
-<h2>Bienvenido <?php echo $nombre; ?>!</h2>
+<h2>Bienvenido <?php echo $nombre; ?>!<br /> tu nivel es: Usuario
+</h2>
 <a href="./autorizar/salir">Salir</a>
 </body>
 </html>

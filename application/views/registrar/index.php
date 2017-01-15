@@ -63,12 +63,7 @@
                     <input type="text" class="form-control" id="telefono" name="telefono" >
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="fotografia">Fotografia:</label>
-                <div class="col-sm-10">
-                    <input type="file" name="fotografia" />
-                </div>
-            </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="clave">Contraseña:</label>
                 <div class="col-sm-5">
