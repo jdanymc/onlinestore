@@ -25,5 +25,20 @@ class Usuario extends AbstractclassBasicModel
             return false;
         }
     }
+    function existe($email){
+        $this -> db -> select('*');
+        $this -> db -> from($this::DB_TABLE);
+        $this -> db -> where('email', $email);
+        $this -> db -> limit(1);
+        $query = $this -> db -> get();
+        if($query -> num_rows() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

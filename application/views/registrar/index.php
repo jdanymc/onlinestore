@@ -27,14 +27,14 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">(*) Email:</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" name="email" required data-error="Email es inválido">
-                    <div class="help-block with-errors"></div>
+                    <input type="email" class="form-control" id="email" name="email" required data-error="Email es inválido" value="<?php echo @$email?>">
+                    <div class="help-block with-errors"><?php echo isset($error)?($error.' : '.@$email):'';?></div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="fechanac">(*) Cumpleaños:</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="fechanac" name="fechanac" required>
+                    <input type="text" class="form-control" id="fechanac" name="fechanac" value="<?php echo @$fechanac?>" required>
                 </div>
                 <script type="text/javascript">
                     $(function () {
@@ -48,19 +48,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nombre">(*) Nombres:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre" name="nombre" required >
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo @$nombre?>" required >
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="apellidos">(*) Apellidos:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="apellidos" name="apellidos"  required>
+                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php echo @$apellidos?>" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="telefono">Teléfono:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="telefono" name="telefono" >
+                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo @$telefono?>">
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary">Crear Usuario</button>
-                    <button class="btn btn-default" onclick="location.href='http://dev.onlinestore/autorizar'; return false;">Retornar</button>
+                    <button class="btn btn-default" onclick="location.href='./autorizar'; return false;">Retornar</button>
                 </div>
             </div>
         </form>

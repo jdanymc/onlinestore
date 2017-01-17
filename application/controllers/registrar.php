@@ -14,31 +14,43 @@ class Registrar extends AbstractController {
 
             $this->load->model('Usuario');
 
-            $this->Usuario->id = '';
-            $this->Usuario->email = $email;
-            $this->Usuario->cumpleanios = $fechanac;
-            $this->Usuario->nombre = $nombre;
-            $this->Usuario->apellidos = $apellidos;
-            $this->Usuario->telefono = $telefono;
-            $this->Usuario->password = md5($clave);
-            $this->Usuario->save();
-            if($this->Usuario->getLastID()>0) {
-                $this->load->model('UsuarioRelacion');
-                $this->UsuarioRelacion->id = '';
-                $this->UsuarioRelacion->usuarios_id = $this->Usuario->getLastID();
-                $this->UsuarioRelacion->usuarios_tipos_id = '1';
-                $this->UsuarioRelacion->save();
-                $this->load->view('registrar/registrado', (array('nombre' => $nombre)));
-            }
-            else{
+            if(!$this->Usuario->existe($email)) {
+                $this->Usuario->id = '';
+                $this->Usuario->email = $email;
+                $this->Usuario->cumpleanios = $fechanac;
+                $this->Usuario->nombre = $nombre;
+                $this->Usuario->apellidos = $apellidos;
+                $this->Usuario->telefono = $telefono;
+                $this->Usuario->password = md5($clave);
+                $this->Usuario->save();
+                if ($this->Usuario->getLastID() > 0) {
+                    $this->load->model('UsuarioRelacionTipo');
+                    $this->UsuarioRelacionTipo->id = '';
+                    $this->UsuarioRelacionTipo->usuarios_id = $this->Usuario->getLastID();
+                    $this->UsuarioRelacionTipo->usuarios_tipos_id = '1';
+                    $this->UsuarioRelacionTipo->save();
+                    $this->load->view('registrar/registrado', (array('nombre' => $nombre)));
+                } else {
+                    $data = array(
+                        'email' => $email,
+                        'fechanac' => $this->input->post('fechanac'),
+                        'nombre' => $nombre,
+                        'apellidos' => $apellidos,
+                        'telefono' => $telefono,
+                        'error' => 'Error desconocido'
+                    );
+                    $this->load->view('registrar/index', $data);
+                }
+            }else{
                 $data = array(
-                    'email'=>$email,
-                    'fechanac'=>$this->input->post('fechanac'),
-                    'nombre'=> $nombre,
-                    'apellidos'=> $apellidos,
-                    'telefono'=> $telefono
+                    'email' => $email,
+                    'fechanac' => $this->input->post('fechanac'),
+                    'nombre' => $nombre,
+                    'apellidos' => $apellidos,
+                    'telefono' => $telefono,
+                    'error' => 'Existe otro usuario con este e-mail'
                 );
-                $this->load->view('registrar/index',$data);
+                $this->load->view('registrar/index', $data);
             }
         }
         else

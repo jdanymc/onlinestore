@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 include_once "abstractclassBasicModel.php";
-class UsuarioRelacion extends AbstractclassBasicModel
+class UsuarioRelacionTipo extends AbstractclassBasicModel
 {
     const DB_TABLE = 'relacion_usuarios_tipos';
     const DB_TABLE_PK = 'id';
